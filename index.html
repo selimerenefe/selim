@@ -1,40 +1,349 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Cogni - Goal Tracking Companion</title>
+<html> 
+<style>
+/* New styles for chatbot container */
 
-    <link rel="stylesheet" href="styles.css">
+#message-input::placeholder {
+  color: #CDCDCD;
+}
+#send-button {
+                         border: 1px solid #cdcdcd;
+flex-grow: 1;  font-family: 'Inter', sans-serif;
+			font-weight: 400;
+                 color: white;
+                 
+background: black;
+;      
+font-size: 20px;
+height: 57px;
+margin-left: -5px;
+                 width:85px;
+border-radius: 0rem .5rem .5rem 0rem;;                     
+border-left: 1px solid white;
 
-<script>
-const goalForm = document.getElementById('goal-form');
 
-goalForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+}
 
-  const goal = document.getElementById('goal-input').value;
+#message-input {
+  width: 84%;
+    padding-left: 13px; 
+ font-family: 'Inter', sans-serif;
+			font-weight: 400;
+                       height: 57px;
+                       border: 1px solid #cdcdcd;
+                       color: white;
+                       border-right: none;
+                       font-size: 20px;
+border-radius: .5rem 0rem 0rem .5rem;  background-color:  black;/* Change the opacity value (0.8) to your desired value */
+}
 
-  // Redirect to goal page and generate follow-up questions
-  window.location.href = `/goal.html?goal=${goal}`;
-});
-</script>
 
 
 
-</head>
+#chat-form {
+  
+  margin-top: 710px;
+}
+.chatbot-container {
+  
+  width: 45%;
+  height: 700px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  border: 1px solid #CDCDCD;
+  border-radius: .5rem;
+  margin-left: 15px;
+}
+
+/* Style for chat messages */
+.chat-message {
+  margin: 10px;
+  padding: 5px;
+  background-color: #CDCDCD;
+  color: black;
+  border-radius: .5rem;
+}
+
+.header {
+  font-size: 30px;
+  color:  #cdcdcd;
+  width: 530px;
+  margin-top: 5px;
+    margin-left: 15px;
+     font-family: 'Inter', sans-serif;
+        font-weight: 900;
+        letter-spacing: -.025em;
+font-weight: 400;
+  margin-bottom: 20px;
+}
+    
+    .progress-bar {
+      width: 530px;
+      height: 20px;
+        margin-left: 15px;
+
+      background-color: white;
+      border: 1px solid #CDCDCD;
+      border-radius: .5rem;
+      margin-bottom: 50px;
+    }
+    
+    .progress {
+      width: 10%;
+      height: 100%;
+      background-color: #006aff;
+      border-radius: .5rem;
+    }
+
+
+.container {
+  max-width: 550px;
+  padding: 0;
+  margin-left: 15px;
+  overflow-y: scroll;
+  height: 289px; /* set the height of the container */
+}
+
+    /* Style for the table */
+table {
+  border-collapse: collapse;
+  border: 1px solid white;
+border-radius: 10px;
+width: 520px;
+margin-bottom: 20px;
+  background-color: black;
+  color: #CDCDCD;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+/* Style for the table cells */
+td {
+  border: 1px solid white;
+  padding: 8px;
+  
+  text-align: left;
+}
+
+/* Style for the odd numbered rows */
+tr:nth-child(odd) {
+  background-color: black;
+}
+
+/* Style for the even numbered rows */
+tr:nth-child(even) {
+  background-color: black;
+}
+
+
+
+/* Style for the second column */
+td:last-child {
+  text-align: right;
+  width: 50%;
+}
+
+/* Style for the scrollbar */
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Style for the scrollbar track */
+.container::-webkit-scrollbar-track {
+  background: #CDCDCD;
+    border-radius: .5rem;
+
+}
+
+/* Style for the scrollbar thumb */
+.container::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: .5rem;
+}
+
+/* Style for the scrollbar thumb on hover */
+.container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+tr:nth-child(1),
+tr:nth-child(2) {
+  color: white;
+  background-color: #16CF65;
+}
+
+tr:hover {
+font-weight: 500;
+}
+
+  body {
+      background-color: rgba(43,43,34, 0);;
+   font-family: "neue-haas-grotesk-text", sans-serif;
+      color: black;
+      margin-left: 50%;
+      padding: 0;
+    }
+    
+ 
+
+
+.header2 {
+  font-size: 24px;
+  width: 530px;
+  
+  margin-left: 15px;
+  color: #CDCDCD;
+  font-family: 'Inter', sans-serif;
+        font-weight: 800;
+        letter-spacing: -.025em;
+  margin-top: 20px;
+font-weight: 400;
+  margin-bottom: 20px;
+}
+
+
+    
+    .update-input {
+  display: block;
+  width: 530px;
+    resize: none;
+    font-weight: 800;
+border: 1px solid #CDCDCD  ;
+margin-left: 15px;
+      height: 10rem;
+      background-color: black;
+      color:  white;
+      padding: 15px; 
+      border-radius: .5rem;
+
+font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        letter-spacing: -.025em;      font-size: 20px;
+    }
+    
+
+.update-input:focus {
+  border-width: 1.5px;
+outline: none;
+}
+</style>
 <body>
-	<header>
-		<h1>Cogni</h1>
-		<input type="text" placeholder="Enter your goal here">
-		<nav>
-			<ul>
-				<li><a href="#">Dashboard</a></li>
-				<li><a href="#">Login</a></li>
-				<li><a href="#">Join Now</a></li>
-			</ul>
-		</nav>
-	</header>
-	<main>
-		<!-- Add content here -->
-	</main>
-</body>
+<div class="chatbot-container">
+<form id="chat-form">
+  <input type="text" id="message-input" placeholder="Type here...">
+    <button type="submit" id="send-button">Send</button>
+</form>
+</div>
+    <div class="main-content">
+     <div class="header">
+    <p>Goal Progress</p>
+  </div>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      </div>
+  <div class="header">
+    <p>Your Tasks</p>
+  </div>
+  <div class="container">
+    <table>
+      <tr>
+        <td>Develop a book concept</td>
+<td><b>Completed</b></td>      </tr>
+      <tr>
+        <td>Create an outline</td>
+<td><b>Completed</b></td>      </tr>
+      <tr>
+        <td>Research information</td>
+        <td>May 15th, 2023</td>
+      </tr>
+      <tr>
+        <td>Write the first draft</td>
+        <td>May 31st, 2023</td>
+      </tr>
+      <tr>
+        <td>Revise and edit</td>
+        <td>June 15th, 2023</td>
+      </tr>
+      <tr>
+        <td>Finalize the manuscript</td>
+        <td>June 30th, 2023</td>
+      </tr>
+      <tr>
+        <td>Design the cover and interior</td>
+        <td>July 15th, 2023</td>
+      </tr>
+      <tr>
+        <td>Format the book for publishing</td>
+        <td>July 30th, 2023</td>
+      </tr>
+      <tr>
+        <td>Choose a publishing method</td>
+        <td>August 15th, 2023</td>
+      </tr>
+      <tr>
+        <td>Publish the book</td>
+        <td>August 19th, 2023</td>
+        </tr>
+        </table>
+        </div>
+        </body>
+        
+       <div class="header2">
+       <br>
+    <p>Track your progress and milestones, our AI will adjust your plan instantly.
+
+
+
+
+</p>
+  </div>
+      <textarea class="update-input" placeholder="Enter your daily update..."></textarea>
+      <br>
+      
+      
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
+    const rows = document.querySelectorAll('tr');
+    let selectedRow = null;
+
+    rows.forEach(row => {
+      row.addEventListener('click', () => {
+        // Revert the style of the previously selected row
+        if (selectedRow !== null) {
+          selectedRow.style.backgroundColor = getRowBackgroundColor(selectedRow.rowIndex);
+          selectedRow.style.color = getRowColor(selectedRow.rowIndex);
+        }
+
+        // Apply selection to the clicked row
+        row.style.backgroundColor = 'white';
+        row.style.color = 'black';
+        selectedRow = row;
+      });
+    });
+
+    // Function to get the background color for each row
+    function getRowBackgroundColor(index) {
+      if (index === 0 || index === 1) {
+        return '#16CF65'; // Green color for the first two rows
+      } else {
+        return 'black'; // Original background color for other rows
+      }
+    }
+
+    // Function to get the text color for each row
+    function getRowColor(index) {
+      if (index === 0 || index === 1) {
+        return 'white'; // White text color for the first two rows
+      } else {
+        return '#CDCDCD'; // Original text color for other rows
+      }
+    }
+  });
+</script>
 </html>
+
+   
+    
